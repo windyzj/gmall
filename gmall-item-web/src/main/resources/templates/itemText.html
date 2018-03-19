@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:text="${skuInfo.skuName}"></div>
+<div th:text="${session.skuName}"> </div>
+ <table border="1">
+     <tr th:each="skuImage:${skuInfo.skuImageList}">
+         <td th:text="${skuImage.id}">
+         </td>
+         <td th:text="${skuImage.imgName}">
+         </td>
+         <td> <a th:href="${skuImage.imgUrl}" th:text="${skuImage.imgName}" />
+         </td>
+         <td> <a th:href="@{/index.html}" th:text="${skuImage.imgName}" />
+         </td>
+         <td th:text="(${skuImage.id}=='10')?'是10':'不是10'">
+         </td>
+         <td th:if="${skuImage.id}=='10'" >123456</td>
+     </tr>
+ </table>
+<div th:include="itemInner"/>
+
+</body>
+</html>

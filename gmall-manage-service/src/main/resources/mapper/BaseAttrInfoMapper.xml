@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.gmall.manage.mapper.BaseAttrInfoMapper">
+    <select  id ="selectAttrInfoList" parameterType="long" resultMap="attrInfoMap">
+        SELECT ba.id,ba.attr_name,ba.catalog3_id,
+        bv.id value_id ,bv.value_name, bv.attr_id FROM
+        base_attr_info ba INNER JOIN  base_attr_value bv  ON ba.id =bv.attr_id
+        where  ba.catalog3_id=#{catalog3Id}
+    </select>
+    <resultMap id="attrInfoMap" type="com.atguigu.gmall.bean.BaseAttrInfo" autoMapping="true">
+        <result property="id" column="id" ></result>
+        <collection property="attrValueList" ofType="com.atguigu.gmall.bean.BaseAttrValue" autoMapping="true">
+            <result property="id" column="value_id" ></result>
+        </collection>
+    </resultMap>
+
+
+    <select  id ="selectAttrInfoListByIds"   resultMap="attrInfoMap">
+        SELECT ba.id,ba.attr_name,ba.catalog3_id,
+        bv.id value_id ,bv.value_name, bv.attr_id FROM
+        base_attr_info ba INNER JOIN  base_attr_value bv  ON ba.id =bv.attr_id
+        where  ba.id in (${attrIds})
+    </select>
+</mapper>
